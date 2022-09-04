@@ -1,0 +1,33 @@
+---
+name: Deploy
+
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install project dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --assume-yes \
+            yamllint
+
+      - name: Install project node packages
+        run: npm install
+
+      - name: Run linting
+        run: npm run ci:lint
+
+      - name: Run unit tests
+        run: npm run test

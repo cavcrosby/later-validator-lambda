@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "sls": "serverless offline",
+    "lint": "eslint --fix ./ && yamllint ./.github/workflows 2>&1",
+    "test": "mocha",
+    "docs": "jsdoc later-validator.js --destination ./docs",
+    "ci:lint": "eslint ./ && yamllint ./.github/workflows 2>&1"
+  },
+  "dependencies": {
+    "@breejs/later": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-google": "^0.14.0",
+    "jsdoc": "^3.6.11",
+    "mocha": "^10.0.0",
+    "serverless": "^3.22.0",
+    "serverless-offline": "^10.0.0"
+  }
+}

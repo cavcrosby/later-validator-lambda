@@ -1,0 +1,17 @@
+service: later-validator-lambda
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+
+functions:
+  laterScheduleValidator:
+    handler: handler.laterScheduleValidator
+    events:
+      - httpApi:
+          path: /later-validator
+          method: post
+
+plugins:
+  - serverless-offline
