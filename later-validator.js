@@ -1,5 +1,3 @@
-
-
 /**
 * Represents a later schedule expression validator.
 */
