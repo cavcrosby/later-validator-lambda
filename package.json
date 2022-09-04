@@ -2,7 +2,7 @@
   "scripts": {
     "sls": "serverless offline",
     "lint": "eslint --fix ./ && yamllint ./.github/workflows 2>&1",
-    "test": "mocha",
+    "test": "mocha --file tests.js",
     "docs": "jsdoc later-validator.js --destination ./docs",
     "ci:lint": "eslint ./ && yamllint ./.github/workflows 2>&1"
   },
