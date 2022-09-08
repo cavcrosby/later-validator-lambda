@@ -2,7 +2,7 @@
   "scripts": {
     "sls": "serverless offline",
     "lint": "./scripts/lint",
-    "test": "mocha --file tests.js",
+    "test": "mocha tests.js",
     "docs": "jsdoc later-validator.js --destination ./docs",
     "genzip": "./scripts/genzip",
     "_:init": "npm install && terraform init",
