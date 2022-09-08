@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Generates a zip archive to be consumed by the AWS Lambda service.
+
+set -eo pipefail
+
+# constants
+readonly REPO_ROOT="${PWD}"
+
+# JSON path is in respective to npm running at the top level of the repository
+ZIP_FILE_PATH="./$(jq --raw-output < "./inputs.tfvars.json" '.["deployment_pkg_name"]')"
+readonly ZIP_FILE_PATH
+
+temp_dir_path="$(mktemp --directory)"
+readonly temp_dir_path
+
+cp --verbose \
+    "./package.json" \
+    "./handler.js" \
+    "./later-validator.js" \
+    "${temp_dir_path}"
+
+npm --prefix "${temp_dir_path}" install --omit=dev
+cd "${temp_dir_path}"
+zip --recurse-paths \
+    "${ZIP_FILE_PATH}" \
+    "./node_modules" \
+    "./handler.js" \
+    "./later-validator.js"
+
+cp --verbose "${ZIP_FILE_PATH}" "${REPO_ROOT}"

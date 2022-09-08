@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
 
       - uses: actions/setup-node@v3
         with:
@@ -23,11 +24,15 @@ jobs:
           sudo apt-get install --assume-yes \
             yamllint
 
-      - name: Install project node packages
-        run: npm install
+      - name: Initialize project
+        run: npm run _:init
 
       - name: Run linting
         run: npm run ci:lint
 
       - name: Run unit tests
         run: npm run test
+
+      - name: Run 'terraform validate'
+        run: |
+          terraform validate

@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Lints all code with various linters.
+
+set -eo pipefail
+
+eslint --fix "./"
+yamllint "./.github/workflows" 2>&1
+terraform fmt -recursive "./"

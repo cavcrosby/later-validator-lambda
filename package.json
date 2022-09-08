@@ -1,10 +1,14 @@
 {
   "scripts": {
     "sls": "serverless offline",
-    "lint": "eslint --fix ./ && yamllint ./.github/workflows 2>&1",
+    "lint": "./scripts/lint",
     "test": "mocha --file tests.js",
     "docs": "jsdoc later-validator.js --destination ./docs",
-    "ci:lint": "eslint ./ && yamllint ./.github/workflows 2>&1"
+    "genzip": "./scripts/genzip",
+    "_:init": "npm install && terraform init",
+    "tf:apply": "terraform apply -var-file=\"./inputs.tfvars.json\"",
+    "tf:rm": "terraform destroy -var-file=\"./inputs.tfvars.json\"",
+    "ci:lint": "./scripts/ci_lint"
   },
   "dependencies": {
     "@breejs/later": "^4.1.0"
