@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "_:init": "npm install && terraform init",
+    "_:init": "npm install && terraform init && pre-commit install",
     "lint": "./scripts/lint",
     "test": "mocha tests.js",
     "docs": "jsdoc later-validator.js --destination ./docs",
@@ -8,7 +8,7 @@
     "genzip": "./scripts/genzip",
     "tf:apply": "terraform apply -var-file=\"./inputs.tfvars.json\"",
     "tf:rm": "terraform destroy -var-file=\"./inputs.tfvars.json\"",
-    "ci:lint": "./scripts/ci_lint"
+    "pre-commit:yamllint": "yamllint --strict 2>&1"
   },
   "dependencies": {
     "@breejs/later": "^4.1.0"

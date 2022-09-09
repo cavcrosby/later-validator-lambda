@@ -5,5 +5,7 @@
 set -eo pipefail
 
 eslint --fix "./"
-yamllint "./.github/workflows" 2>&1
 terraform fmt -recursive "./"
+
+# shellcheck disable=2046
+yamllint $(find . -type f -and \( -iname '*.yml' -or -iname '*.yaml' \) -and ! -iwholename '*node_modules*') 2>&1
