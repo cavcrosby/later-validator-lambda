@@ -7,8 +7,7 @@
     "sls": "serverless offline",
     "genzip": "./scripts/genzip",
     "tf:apply": "terraform apply -var-file=\"./inputs.tfvars.json\"",
-    "tf:rm": "terraform destroy -var-file=\"./inputs.tfvars.json\"",
-    "pre-commit:yamllint": "yamllint --strict 2>&1"
+    "tf:rm": "terraform destroy -var-file=\"./inputs.tfvars.json\""
   },
   "dependencies": {
     "@breejs/later": "^4.1.0"
