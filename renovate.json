@@ -1,35 +1,35 @@
 {
-  "extends": [
-      "config:base"
-  ],
-  "prConcurrentLimit": 4,
-  "timezone": "utc",
-  "schedule": [
-      "after 5:00 am before 11:00 am"
-  ],
-  "lockFileMaintenance": {
-      "enabled": true,
-      "automerge": true,
-      "automergeType": "branch",
-      "rebaseWhen": "behind-base-branch",
-      "schedule": [
-          "after 5:00 am before 11:00 am"
-      ]
-  },
-  "packageRules": [
-      {
-          "matchManagers": ["npm"],
-          "matchUpdateTypes": ["minor", "patch"],
-          "automerge": true,
-          "automergeType": "branch",
-          "rebaseWhen": "behind-base-branch"
-      },
-      {
-          "matchManagers": ["github-actions"],
-          "matchUpdateTypes": ["major", "minor", "patch"],
-          "automerge": true,
-          "automergeType": "branch",
-          "rebaseWhen": "behind-base-branch"
-      }
-  ]
+    "extends": [
+        "config:base"
+    ],
+    "prConcurrentLimit": 4,
+    "timezone": "utc",
+    "schedule": [
+        "after 5:00 am before 11:00 am"
+    ],
+    "lockFileMaintenance": {
+        "enabled": true,
+        "automerge": true,
+        "automergeType": "branch",
+        "rebaseWhen": "behind-base-branch",
+        "schedule": [
+            "after 5:00 am before 11:00 am"
+        ]
+    },
+    "packageRules": [
+        {
+            "matchManagers": ["npm"],
+            "matchUpdateTypes": ["minor", "patch"],
+            "automerge": true,
+            "automergeType": "branch",
+            "rebaseWhen": "behind-base-branch"
+        },
+        {
+            "matchManagers": ["github-actions"],
+            "matchUpdateTypes": ["major", "minor", "patch"],
+            "automerge": true,
+            "automergeType": "branch",
+            "rebaseWhen": "behind-base-branch"
+        }
+    ]
 }
