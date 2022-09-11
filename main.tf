@@ -107,11 +107,12 @@ resource "aws_sns_topic" "email_me" {
   name = "emailMe"
 }
 
-resource "aws_cloudwatch_metric_alarm" "utility_lambdas_api_count_alarm" {
-  alarm_name          = "UtilityLambdasApiCountAlarm"
-  alarm_description   = "This alarm monitors potential brute force attacks against the api gateway."
+resource "aws_cloudwatch_metric_alarm" "utility_lambdas_api_invoke_count_alarm" {
+  alarm_name          = "UtilityLambdasApiInvokeCountAlarm"
+  alarm_description   = "This alarm monitors potential brute force attacks against this api."
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "1"
+  datapoints_to_alarm = "1"
   metric_name         = "Count"
   namespace           = "AWS/ApiGateway"
   period              = "300"
