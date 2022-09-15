@@ -45,7 +45,9 @@ describe('Parse JSON functionality', function() {
 
   describe('Parse non-json string Input 6', function() {
     it('return JSON passed in', function() {
-      const jsonStr = '{"schedule": "every 5 mins", "foo": "bar"}';
+      const jsonStr = (
+        `{"${LaterValidator.SCHEDULE_KEY}": "every 5 mins", "foo": "bar"}`
+      );
       const parsedJson = laterValidator.parseJson(jsonStr);
       const json = JSON.parse(jsonStr);
       return assert.equal(
@@ -76,7 +78,9 @@ describe('Schedule validation functionality', function() {
     it('return valid schedule', function() {
       return assert.equal(
           laterValidator.validate(
-              laterValidator.parseJson('{"schedule": "every 5 mins"}'),
+              laterValidator.parseJson(
+                  `{"${LaterValidator.SCHEDULE_KEY}": "every 5 mins"}`,
+              ),
           ).valid,
           true,
       );
@@ -158,7 +162,7 @@ describe('Date validation functionality', function() {
   describe('Validate date Input 1', function() {
     it('return valid date', function() {
       const parsedJson = laterValidator.parseJson(
-          '{"schedule": "every 5 mins", ' +
+          `{"${LaterValidator.SCHEDULE_KEY}": "every 5 mins", ` +
           `"${LaterValidator.DATE_KEY}": "2013-03-22T10:00:00Z"}`,
       );
       laterValidator.validate(parsedJson);
@@ -171,7 +175,7 @@ describe('Date validation functionality', function() {
   describe('Validate date Input 2', function() {
     it('return invalid date', function() {
       const parsedJson = laterValidator.parseJson(
-          '{"schedule": "every 5 mins", ' +
+          `{"${LaterValidator.SCHEDULE_KEY}": "every 5 mins", ` +
           `"${LaterValidator.DATE_KEY}": "2013-03-22T11:17:00Z"}`,
       );
       laterValidator.validate(parsedJson);
@@ -184,7 +188,7 @@ describe('Date validation functionality', function() {
   describe('Validate no date Input 1', function() {
     it('return invalid date', function() {
       const parsedJson = laterValidator.parseJson(
-          '{"schedule": "every 5 mins"}',
+          `{"${LaterValidator.SCHEDULE_KEY}": "every 5 mins"}`,
       );
       laterValidator.validate(parsedJson);
       return assert.equal(
@@ -196,7 +200,7 @@ describe('Date validation functionality', function() {
   describe('Validate improper (NaN) date Input 1', function() {
     it('return invalid date', function() {
       const parsedJson = laterValidator.parseJson(
-          '{"schedule": "every 5 mins", ' +
+          `{"${LaterValidator.SCHEDULE_KEY}": "every 5 mins", ` +
           `"${LaterValidator.DATE_KEY}": "I AM A DATE, FEAR ME"}`,
       );
       laterValidator.validate(parsedJson);
@@ -210,7 +214,7 @@ describe('Date validation functionality', function() {
     it('return invalid date', function() {
       const localLaterValidator = new LaterValidator(later);
       const parsedJson = localLaterValidator.parseJson(
-          '{"schedule": "every 5 mins", ' +
+          `{"${LaterValidator.SCHEDULE_KEY}": "every 5 mins", ` +
           `"${LaterValidator.DATE_KEY}": "2013-03-22T10:00:00Z"}`,
       );
       return assert.equal(
@@ -223,7 +227,7 @@ describe('Date validation functionality', function() {
   describe('Validate invalid schedule validation date Input 1', function() {
     it('return invalid date', function() {
       const parsedJson = laterValidator.parseJson(
-          '{"schedule": "hoopla", ' +
+          `{"${LaterValidator.SCHEDULE_KEY}": "hoopla", ` +
           `"${LaterValidator.DATE_KEY}": "2013-03-22T10:00:00Z"}`,
       );
       laterValidator.validate(parsedJson);
