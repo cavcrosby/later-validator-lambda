@@ -52,14 +52,11 @@ class LaterValidator {
   *     schedule is not valid, the string slice where Later had issues parsing
   *     and if the schedule is incomplete.
   * @example
-  * // returns { "valid":true }
-  * validate('every 5 mins');
+  * // returns { valid:true }
+  * validate({'schedule': 'every 5 mins'});
   * @example
-  * // returns { "valid":true }
-  * validate('{"schedule": "every 5 mins"}');
-  * @example
-  * // returns { "valid":false, "incomplete":false, "issue_with":"hooplas" }
-  * validate('{"schedule": "every 5 hooplas"}');
+  * // returns { valid:false, incomplete:false, issue_with:'hooplas' }
+  * validate({'schedule': 'every 5 hooplas'});
   */
   validate(parsedJson) {
     // needed so nested functions can access 'this' symbol
@@ -115,17 +112,13 @@ class LaterValidator {
   *     if a date is an occurrence of the schedule otherwise this will always
   *     be false.
   * @example
-  * // returns { "in_schedule":true }
-  * validate('every 5 mins');
-  * isValid('2013-03-22T10:00:00Z');
+  * // returns { in_schedule:true }
+  * validate({'schedule': 'every 5 mins'});
+  * isValid({'date': '2013-03-22T10:00:00Z'});
   * @example
-  * // returns { "in_schedule":true }
-  * validate('every 5 mins');
-  * isValid('2013-03-22T10:05:00Z');
-  * @example
-  * // returns { "in_schedule":false }
-  * validate('every 5 mins');
-  * isValid('2013-03-22T11:17:00Z');
+  * // returns { in_schedule:false }
+  * validate({'schedule': 'every 5 mins'});
+  * isValid({'date': '2013-03-22T11:17:00Z'});
   */
   isValid(parsedJson) {
     if (
