@@ -147,6 +147,29 @@ describe('Schedule validation functionality', function() {
     });
   });
 
+  describe('Validate string Input 7', function() {
+    it('return incomplete schedule', function() {
+      return assert.equal(
+          laterValidator.validate(
+              laterValidator.parseJson('every 5')).incomplete,
+          true,
+      );
+    });
+  });
+
+  describe('Validate string Input 7', function() {
+    it('return invalid but complete schedule', function() {
+      return assert.equal(
+          laterValidator.validate(
+              laterValidator.parseJson(
+                  '{"schedule": "every 5 hooplas"}',
+              ),
+          ).incomplete,
+          false,
+      );
+    });
+  });
+
   describe('Validate json Input 2', function() {
     it('return invalid schedule', function() {
       return assert.equal(

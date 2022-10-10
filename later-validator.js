@@ -49,7 +49,8 @@ class LaterValidator {
   * @param {object} parsedJson - Parsed json (see {@link parseJson}) assumed to
   *     possibly contain a Later schedule to validate.
   * @return {object} An object reporting if schedule is valid and if the
-  *     schedule is not valid, the string slice where Later had issues parsing.
+  *     schedule is not valid, the string slice where Later had issues parsing
+  *     and if the schedule is incomplete.
   * @example
   * // returns { "valid":true }
   * validate('every 5 mins');
@@ -57,7 +58,7 @@ class LaterValidator {
   * // returns { "valid":true }
   * validate('{"schedule": "every 5 mins"}');
   * @example
-  * // returns { "valid":false, "issue_with":"hooplas" }
+  * // returns { "valid":false, "incomplete":false, "issue_with":"hooplas" }
   * validate('{"schedule": "every 5 hooplas"}');
   */
   validate(parsedJson) {
@@ -86,10 +87,18 @@ class LaterValidator {
       return {
         valid: this.validSchedule,
       };
+    } else if (schedule.error === this.scheduleText.length) {
+      this.validSchedule = false;
+      return {
+        valid: this.validSchedule,
+        incomplete: true,
+        issue_with: this.scheduleText.slice(schedule.error),
+      };
     } else {
       this.validSchedule = false;
       return {
         valid: this.validSchedule,
+        incomplete: false,
         issue_with: this.scheduleText.slice(schedule.error),
       };
     }
