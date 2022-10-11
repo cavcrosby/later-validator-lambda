@@ -85,7 +85,7 @@ describe('Schedule validation functionality', function() {
     });
   });
 
-  describe('Validate parseJson Input 2', function() {
+  describe('Validate parseJson Input 1', function() {
     it('return valid schedule', function() {
       return assert.equal(
           laterValidator.validate(
