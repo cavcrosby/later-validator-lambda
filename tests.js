@@ -193,6 +193,49 @@ describe('Schedule validation functionality', function() {
   });
 });
 
+describe('Schedule generation functionality', function() {
+  describe('Generate schedules 1', function() {
+    it(`return ${laterValidator.numScheduleInstances} schedules instances`,
+        function() {
+          laterValidator.validate(
+              {[LaterValidator.SCHEDULE_KEY]: 'every 5 mins'},
+          );
+          return assert.equal(
+              laterValidator.genScheduleInstances()[
+                  LaterValidator.SCHEDULE_INSTANCES_KEY
+              ].length,
+              laterValidator.numScheduleInstances,
+          );
+        });
+  });
+
+  describe('Generate schedules 2', function() {
+    it(`return 0 schedules instances`, function() {
+      laterValidator.validate({[LaterValidator.SCHEDULE_KEY]: ''});
+      return assert.equal(
+          laterValidator.genScheduleInstances()[
+              LaterValidator.SCHEDULE_INSTANCES_KEY
+          ].length,
+          0,
+      );
+    });
+  });
+
+  describe('Generate schedules 3', function() {
+    it(`return 0 schedules instances invalid schedule`, function() {
+      laterValidator.validate(
+          {[LaterValidator.SCHEDULE_KEY]: 'every 5 hooplas'},
+      );
+      return assert.equal(
+          laterValidator.genScheduleInstances()[
+              LaterValidator.SCHEDULE_INSTANCES_KEY
+          ].length,
+          0,
+      );
+    });
+  });
+});
+
 describe('Date validation functionality', function() {
   describe('Validate json Input 1', function() {
     it('return valid date', function() {

@@ -4,6 +4,7 @@
 class LaterValidator {
   static DATE_KEY = 'date';
   static SCHEDULE_KEY = 'schedule';
+  static SCHEDULE_INSTANCES_KEY = 'schedule_instances';
   static NO_SCHEDULE_ERROR = -1;
 
   /**
@@ -14,6 +15,7 @@ class LaterValidator {
   constructor(later) {
     this.later = later;
     this.scheduleText = null;
+    this.numScheduleInstances = 5;
     this.validSchedule = false;
   }
 
@@ -99,6 +101,48 @@ class LaterValidator {
         issue_with: this.scheduleText.slice(schedule.error),
       };
     }
+  }
+
+  /**
+  * @function genScheduleInstances
+  * @memberof LaterValidator.prototype
+  * @return {object} An object containing a number of dates that meet all of
+  *     the constraints that are imposed by the schedule.
+  * @example
+  * // returns { schedule_instances:
+  * //    [
+  * //      "2022-10-14T03:20:00.000Z",
+  * //      "2022-10-14T03:25:00.000Z",
+  * //      "2022-10-14T03:30:00.000Z",
+  * //      "2022-10-14T03:35:00.000Z",
+  * //      "2022-10-14T03:40:00.000Z"
+  * //    ]
+  * //  }
+  * validate({'schedule': 'every 5 mins'});
+  * genScheduleInstances();
+  * @example
+  * // returns { schedule_instances:[] }
+  * validate({'schedule': ''});
+  * genScheduleInstances();
+  */
+  genScheduleInstances() {
+    if (!this.validSchedule) {
+      return {
+        [this.constructor.SCHEDULE_INSTANCES_KEY]: [],
+      };
+    }
+    let scheduleInstances = this.later.schedule(
+        this.later.parse.text(this.scheduleText),
+    ).next(this.numScheduleInstances);
+
+    // 0 is returned if the schedule is not valid or is empty, which is a
+    // valid schedule but does not have any schedule instances.
+    if (scheduleInstances === 0) {
+      scheduleInstances = [];
+    }
+    return {
+      [this.constructor.SCHEDULE_INSTANCES_KEY]: scheduleInstances,
+    };
   }
 
   /**

@@ -12,6 +12,11 @@ exports.laterScheduleValidator = async (event) => {
       (key) => validateResults[key] = isValidDateResults[key],
   );
 
+  const genScheduleInstancesResults = laterValidator.genScheduleInstances();
+  Object.keys(genScheduleInstancesResults).forEach(
+      (key) => validateResults[key] = genScheduleInstancesResults[key],
+  );
+
   return {
     'statusCode': 200,
     'headers': {
