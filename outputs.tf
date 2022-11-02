@@ -9,6 +9,11 @@ output "lambda_name" {
   value       = aws_lambda_function.later_schedule_validator.function_name
 }
 
+output "api_url" {
+  description = "URL for the API endpoint that calls the lambda."
+  value       = "https://${var.lambda_fqdn}${var.lambda_endpoint}"
+}
+
 output "custom_domain_regional_api_url" {
   description = "URL for the custom domain regional API endpoint on the API Gateway."
   value       = data.aws_api_gateway_domain_name.utility_lambdas.regional_domain_name

@@ -41,6 +41,11 @@ variable "lambda_fqdn" {
   description = "The fully qualified domain name in which to access the lambda by."
 }
 
+variable "lambda_endpoint" {
+  type        = string
+  description = "The URL pattern appended to specify the lambda."
+}
+
 provider "aws" {
   region = var.aws_region
 }
@@ -161,7 +166,7 @@ resource "aws_api_gateway_account" "regional" {
 
 resource "aws_apigatewayv2_route" "later_schedue_validator" {
   api_id    = aws_apigatewayv2_api.utility_lambdas.id
-  route_key = "POST /later-validator"
+  route_key = "POST ${var.lambda_endpoint}"
   target    = "integrations/${aws_apigatewayv2_integration.later_schedue_validator.id}"
 }
 
