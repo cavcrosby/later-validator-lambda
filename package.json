@@ -18,6 +18,6 @@
     "jsdoc": "4.0.0",
     "mocha": "10.1.0",
     "serverless": "3.24.1",
-    "serverless-offline": "11.3.0"
+    "serverless-offline": "11.5.0"
   }
 }
