@@ -1,7 +1,7 @@
-const later = require('@breejs/later');
-const LaterValidator = require('./later-validator');
+import later from '@breejs/later';
+import {LaterValidator} from './later-validator.js';
 
-exports.laterScheduleValidator = async (event) => {
+export const laterScheduleValidator = async (event) => {
   console.log(event);
   const laterValidator = new LaterValidator(later);
   const bodyJson = laterValidator.parseJson(event.body);

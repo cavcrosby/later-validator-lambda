@@ -25,6 +25,7 @@ cd "${temp_dir_path}"
 zip --recurse-paths \
     "${ZIP_FILE_PATH}" \
     "./node_modules" \
+    "./package.json" \
     "./handler.js" \
     "./later-validator.js"
 

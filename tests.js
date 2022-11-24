@@ -1,6 +1,6 @@
-const assert = require('assert');
-const later = require('@breejs/later');
-const LaterValidator = require('./later-validator');
+import assert from 'assert';
+import later from '@breejs/later';
+import {LaterValidator} from './later-validator.js';
 
 const laterValidator = new LaterValidator(later);
 

@@ -187,4 +187,4 @@ class LaterValidator {
   }
 }
 
-module.exports = LaterValidator;
+export {LaterValidator};
