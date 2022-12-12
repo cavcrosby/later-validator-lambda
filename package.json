@@ -1,5 +1,8 @@
 {
   "type": "module",
+  "engines": {
+    "node": ">=16 <17"
+  },
   "scripts": {
     "_:init": "npm install && terraform init && pre-commit install",
     "lint": "./scripts/lint",
