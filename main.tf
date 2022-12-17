@@ -84,7 +84,7 @@ resource "aws_lambda_function" "later_schedule_validator" {
   source_code_hash = filebase64sha256(var.deployment_pkg_name)
   role             = aws_iam_role.utility_lambdas.arn
   handler          = "handler.laterScheduleValidator"
-  runtime          = "nodejs16.x"
+  runtime          = "nodejs18.x"
 }
 
 resource "aws_acm_certificate" "later_schedule_validator" {

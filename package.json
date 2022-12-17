@@ -1,7 +1,7 @@
 {
   "type": "module",
   "engines": {
-    "node": ">=16 <19"
+    "node": ">=18 <19"
   },
   "scripts": {
     "_:init": "npm install && terraform init && pre-commit install",
